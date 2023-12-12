@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Client;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -35,6 +36,10 @@ class DatabaseSeeder extends Seeder
         Job::factory()->create([
             'user_id' => $user_2->id,
             'title' => 'The same title',
+        ]);
+
+        Client::factory(20)->create([
+            'user_id' => $user_1->id
         ]);
     }
 }

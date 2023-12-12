@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +25,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/jobs', JobController::class)->middleware('auth');
+Route::resource('/jobs', JobController::class)->except('show')->middleware('auth');
+Route::resource('/clients', ClientController::class)->except('show')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
