@@ -22,6 +22,6 @@ class UpdateClientRequest extends FormRequest
      */
     public function rules(): array
     {
-        return Client::CreateAndUpdate();
+        return Client::create_and_update();
     }
 }

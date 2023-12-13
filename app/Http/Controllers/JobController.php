@@ -83,6 +83,7 @@ class JobController extends Controller
     {
         $this->authorize('delete', $job);
         $job->delete();
-        return redirect()->route('jobs.index');
+        // return redirect()->route('jobs.index');
+        return back();
     }
 }

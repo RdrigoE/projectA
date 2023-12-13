@@ -28,6 +28,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test_2@example.com',
         ]);
 
+        Job::factory(14)->create([
+            'user_id' => $user_1->id,
+        ]);
+
+
         Job::factory()->create([
             'user_id' => $user_1->id,
             'title' => 'The same title'

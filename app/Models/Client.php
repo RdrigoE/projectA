@@ -12,7 +12,7 @@ class Client extends Model
 
     protected $guarded = [];
 
-    public static function CreateAndUpdate()
+    public static function create_and_update()
     {
         return [
             'name' => ['required'],

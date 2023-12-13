@@ -72,6 +72,7 @@ class ClientController extends Controller
 
         $client->delete();
 
-        return redirect()->route('clients.index');
+        // return redirect()->route('clients.index');
+        return back();
     }
 }
