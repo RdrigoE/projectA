@@ -20,13 +20,13 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
-        $date = Carbon::now();
         return [
             'user_id' => User::factory(),
             'job_id' => Job::factory(),
             'client_id' => Client::factory(),
-            'start' => $date,
-            'end' => $date->addHours(4),
+            'date' => $this->faker->date('d-m-Y'),
+            'start' => $this->faker->time('H:i'),
+            'end' => $this->faker->time('H:i'),
         ];
     }
 }

@@ -27,14 +27,28 @@
                 <div>{{ $message }}</div>
             @enderror
 
+            {{-- {{ dd($appointment) }} --}}
+            {{-- <label for="date">Date</label>
+            <input type="date" value="{{ $appointment->date }}" name="date" id="date">
+            @error('date')
+                <div>{{ $message }}</div>
+            @enderror --}}
+
+            <label for="date">Date</label>
+            <input type="date" value="{{ $appointment->date->format('Y-m-d') }}" name="date" id="date">
+            @error('date')
+                <div>{{ $message }}</div>
+            @enderror
+
             <label for="start">Start</label>
-            <input type="datetime-local" value="{{ $appointment->start }}" name="start" id="start">
+            <input type="time" value="{{ $appointment->start->format('H:i') }}" name="start" id="start">
             @error('start')
                 <div>{{ $message }}</div>
             @enderror
 
             <label for="end">End</label>
-            <input type="datetime-local" value="{{ $appointment->end }}" name="end" id="end">
+            <input type="time" value="{{ $appointment->end->format('H:i') }}" name="end" id="end"
+                placeholder="dd/mm/yyyy">
             @error('end')
                 <div>{{ $message }}</div>
             @enderror
@@ -42,5 +56,7 @@
 
         <button type="submit">Save</button>
     </form>
+
+
 
 </x-app-layout>

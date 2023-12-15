@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('job_id')->constrained()->cascadeOnDelete();
             $table->foreignId('client_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->date('date');
+            $table->time('start');
+            $table->time('end');
             $table->timestamps();
         });
     }

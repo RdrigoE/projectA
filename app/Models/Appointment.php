@@ -16,7 +16,9 @@ class Appointment extends Model
 
     protected $fillable = ['job_id', 'client_id', 'start', 'end'];
 
+    public $timestamps = true;
     protected $casts = [
+        'date' => 'datetime',
         'start' => 'datetime',
         'end' => 'datetime',
     ];
@@ -31,8 +33,9 @@ class Appointment extends Model
             'job_id' => [Rule::exists('jobs', 'id')->where(function ($query) {
                 return $query->where('user_id', auth()->id());
             })],
-            'start' => ['required', 'date'],
-            'end' => ['required', 'date', 'after:start'],
+            'date' => ['required', 'date'],
+            'start' => ['required',],
+            'end' => ['required', 'after:start'],
         ];
     }
 
