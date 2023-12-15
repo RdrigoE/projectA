@@ -1,5 +1,5 @@
 <x-app-layout>
-    <a href="{{ route('appointments.create') }}">Create Job</a>
+    <a href="{{ route('appointments.create') }}">Create Appointment</a>
     <table>
         <thead>
             <th>
