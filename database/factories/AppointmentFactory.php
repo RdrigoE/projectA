@@ -20,13 +20,17 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
+
+        $start = $this->faker->dateTimeBetween('08:00', '12:00');
+        $end = $this->faker->dateTimeBetween('13:00', '18:00');
+
         return [
             'user_id' => User::factory(),
             'job_id' => Job::factory(),
             'client_id' => Client::factory(),
             'date' => $this->faker->date('d-m-Y'),
-            'start' => $this->faker->time('H:i'),
-            'end' => $this->faker->time('H:i'),
+            'start' => $start->format('H:i'),
+            'end' => $end->format('H:i'),
         ];
     }
 }

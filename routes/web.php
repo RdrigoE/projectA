@@ -23,10 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::resource('/jobs', JobController::class)->except('show')->middleware('auth');
 Route::resource('/clients', ClientController::class)->except('show')->middleware('auth');
 Route::resource('/appointments', AppointmentController::class)->except('show')->middleware('auth');
