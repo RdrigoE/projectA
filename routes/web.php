@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Appointment;
 use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('/jobs', JobController::class)->except('show')->middleware('auth');
 Route::resource('/clients', ClientController::class)->except('show')->middleware('auth');
+Route::resource('/appointments', AppointmentController::class)->except('show')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

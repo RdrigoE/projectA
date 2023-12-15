@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Job;
 use App\Models\User;
@@ -45,6 +46,10 @@ class DatabaseSeeder extends Seeder
 
         Client::factory(20)->create([
             'user_id' => $user_1->id
+        ]);
+
+        Appointment::factory(10)->create([
+            'user_id' => $user_1,
         ]);
     }
 }

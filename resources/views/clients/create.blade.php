@@ -4,7 +4,7 @@
         @csrf
         @method('POST')
         <div>
-            <label for="name">Job Title</label>
+            <label for="name">Client Name</label>
             <input type="text" name="name" id="name">
             @error('name')
                 <div class="text-red-500">{{ $message }}</div>

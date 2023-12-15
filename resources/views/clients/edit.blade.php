@@ -4,7 +4,7 @@
         @csrf
         @method('PATCH')
         <div>
-            <label for="name">Name</label>
+            <label for="name">Client Name</label>
             <input type="text" name="name" id="name" value="{{ $client->name }}">
         </div>
 
