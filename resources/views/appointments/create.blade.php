@@ -1,8 +1,7 @@
 <x-app-layout>
     <x-form.panel>
         <x-form.form :method="'POST'" :action="route('appointments.store')">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight border-b border-b-gray-200 mb-2 pb-1">Create New
-                Appointment</h2>
+            <x-form.title>Create New Appointment</x-form.title>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="client_id">Client</label>
                 <select
@@ -22,7 +21,7 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     name="job_id" id="job_id">
                     @foreach ($jobs as $job)
-                        <option value="{{ $job->id }}">{{ $job->name }}</option>
+                        <option value="{{ $job->id }}">{{ $job->title }}</option>
                     @endforeach
                 </select>
                 @error('job_id')

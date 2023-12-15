@@ -1,17 +1,13 @@
 <x-app-layout>
-
-    <form method="post" action="{{ route('jobs.store') }}">
-        @csrf
-        @method('POST')
-        <div>
-            <label for="title">Job Title</label>
-            <input type="text" name="title" id="title">
-            @error('title')
-                <div class="text-red-500">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <button type="submit">Save</button>
-    </form>
+    <x-form.panel>
+        <x-form.form :method="'POST'" :action="route('jobs.store')">
+            @method('POST')
+            <x-form.title>Create New Job</x-form.title>
+            <x-form.text-input :name="'title'" />
+            <x-form.submit>
+                Submit
+            </x-form.submit>
+        </x-form.form>
+    </x-form.panel>
 
 </x-app-layout>

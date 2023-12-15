@@ -1,17 +1,14 @@
 <x-app-layout>
 
-    <form method="post" action="{{ route('clients.store') }}">
-        @csrf
-        @method('POST')
-        <div>
-            <label for="name">Client Name</label>
-            <input type="text" name="name" id="name">
-            @error('name')
-                <div class="text-red-500">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <button type="submit">Save</button>
-    </form>
+    <x-form.panel>
+        <x-form.form :method="'POST'" :action="route('clients.store')">
+            @method('POST')
+            <x-form.title>Create New Client</x-form.title>
+            <x-form.text-input :name="'name'" />
+            <x-form.submit>
+                Submit
+            </x-form.submit>
+        </x-form.form>
+    </x-form.panel>
 
 </x-app-layout>
