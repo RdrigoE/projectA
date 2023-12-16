@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Appointment>
  */
@@ -21,14 +22,14 @@ class AppointmentFactory extends Factory
     public function definition(): array
     {
 
-        $start = $this->faker->dateTimeBetween('08:00', '12:00');
-        $end = $this->faker->dateTimeBetween('13:00', '18:00');
+        $start = $this->faker->dateTimeBetween('07:00', '10:00');
+        $end = $this->faker->dateTimeBetween('11:00', '20:00');
 
         return [
             'user_id' => User::factory(),
             'job_id' => Job::factory(),
             'client_id' => Client::factory(),
-            'date' => $this->faker->date('d-m-Y'),
+            'date' => $this->faker->dateTimeThisYear()->format('d-m-Y'),
             'start' => $start->format('H:i'),
             'end' => $end->format('H:i'),
         ];

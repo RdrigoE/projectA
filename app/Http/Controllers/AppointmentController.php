@@ -65,6 +65,7 @@ class AppointmentController extends Controller
 
         $appointment->update($request->validated());
 
+
         return redirect()->route('appointments.index');
     }
 
@@ -75,8 +76,11 @@ class AppointmentController extends Controller
     {
         $this->authorize('delete', $appointment);
 
+
         $appointment->delete();
 
-        return back();
+        return http_response_code(200);
+
+        // return back();
     }
 }

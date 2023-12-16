@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user_1->id
         ]);
 
-        Appointment::factory(10)->create([
+        Appointment::factory(200)->create([
             'user_id' => $user_1,
         ]);
     }

@@ -14,13 +14,17 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['job_id', 'client_id', 'start', 'end'];
+    protected $fillable = ['job_id', 'client_id', 'start', 'end', 'date'];
 
     public $timestamps = true;
     protected $casts = [
         'date' => 'datetime',
         'start' => 'datetime',
         'end' => 'datetime',
+    ];
+
+    public $with = [
+        'client', 'job'
     ];
 
 
