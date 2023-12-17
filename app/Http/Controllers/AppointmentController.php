@@ -24,7 +24,18 @@ class AppointmentController extends Controller
     public function create()
     {
         $user = request()->user();
-        return view('appointments.create', ['clients' => $user->clients, 'jobs' => $user->jobs]);
+
+        $queryAttr = request()->query;
+        $date = $queryAttr->get('date');
+        $start = $queryAttr->get('start');
+        $end = $queryAttr->get('end');
+        return view('appointments.create', [
+            'clients' => $user->clients,
+            'jobs' => $user->jobs,
+            'date' => $date,
+            'start' => $start,
+            'end' => $end,
+        ]);
     }
 
     /**
@@ -35,7 +46,7 @@ class AppointmentController extends Controller
         $user = request()->user();
         $user->appointments()->create($request->validated());
 
-        return redirect()->route('appointments.index');
+        return redirect('/');
     }
 
     /**

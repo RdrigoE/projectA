@@ -3,7 +3,7 @@
         <x-form.form :method="'POST'" :action="route('jobs.store')">
             @method('POST')
             <x-form.title>Create New Job</x-form.title>
-            <x-form.text-input :name="'title'" />
+            <x-form.text-input :name="'title'" :value="''" />
             <x-form.submit>
                 Submit
             </x-form.submit>

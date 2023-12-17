@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = request()->user();
+    return view('welcome', ['clients' => $user->clients, 'jobs' => $user->jobs]);
 });
 
 Route::get('/api/appoint', function () {

@@ -1,19 +1,20 @@
 import './bootstrap';
 
+import Calendar from '@toast-ui/calendar';
+import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
 
 Alpine.start();
 
-import Calendar from '@toast-ui/calendar';
-import '@toast-ui/calendar/dist/toastui-calendar.min.css';
+
 var calendar = new Calendar('#calendar', {
     defaultView: 'month',
     taskView: false,
     scheduleView: ['time'],
     // useFormPopup: true,
-    // useDetailPopup: true,
+    useDetailPopup: true,
     usageStatistics: false,
     week: {
         showTimezoneCollapseButton: true,
@@ -68,23 +69,53 @@ async function getData() {
 
 }
 
-calendar.on('beforeCreateEvent', function (event) {
 
-    var schedule = {
-        id: String(Math.random() * 100000000000000000n),
-        title: event.title,
-        isAllDay: event.isAllday,
-        start: event.start,
-        end: event.end,
-        category: 'time',
-        dueDateClass: '',
-        calendarId: '1'
-    };
+calendar.on('selectDateTime', function (event) {
 
-    calendar.createEvents([schedule]);
-    calendar.clearGridSelections();
+    const { start, end } = event;
+    const formattedDate = formatDate(start);
+    const formattedTimeStart = formatHourMinutes(start);
+    const formattedTimeEnd = formatHourMinutes(end);
+
+    let url = new URL('/appointments/create', window.location.origin)
+    url.searchParams.append('date', formattedDate);
+    url.searchParams.append('start', formattedTimeStart);
+    url.searchParams.append('end', formattedTimeEnd);
+    window.location.href = url;
+
+
 });
+// calendar.on('clickEvent', function (event) {
+//     console.log(event)
+//     let eventId = event.id;
 
+//     let editButton = document.querySelector('.toastui-calendar-edit-button');
+
+//     let deleteButton = document.querySelector('.toastui-calendar-delete-button');
+
+//     let url = new URL(`/appointments/edit/${eventId}`, window.location.origin);
+
+
+//     editButton.addEventListener('click', function (event) {
+//         event.stopPropagation();
+//         window.location.href = url;
+//     });
+// });
+
+calendar.on('afterRenderEvent', function (event) {
+    let eventId = event.id;
+
+    let editButton = document.querySelector('.toastui-calendar-edit-button');
+
+    if (editButton) {
+        editButton.addEventListener('click', () => {
+            // event.stopPropagation();
+            let url = new URL(`/appointments/edit/${eventId}`, window.location.origin);
+            console.log('url: ', url)
+            // window.location.href = url;
+        });
+    }
+});
 
 function formatDate(date) {
     let d = new Date(date);
@@ -99,7 +130,7 @@ function formatDate(date) {
 
 function formatHourMinutes(date) {
     let d = new Date(date);
-    console.log(d)
+
     let hours = d.getHours().toString().padStart(2, '0');
     let minutes = d.getMinutes().toString().padStart(2, '0');
 
@@ -110,7 +141,17 @@ function formatHourMinutes(date) {
 }
 
 calendar.on('beforeUpdateEvent', function ({ event, changes }) {
+
+
+
+
     const { id, calendarId } = event;
+
+    if (!changes.end && !changes.start) {
+        let url = new URL(`/appointments/${id}/edit`, window.location.origin);
+        window.location.href = url
+    }
+
 
 
     let obj = {
@@ -121,7 +162,6 @@ calendar.on('beforeUpdateEvent', function ({ event, changes }) {
         end: (changes.end) ? (changes.end.d.d) : (event.end.d.d),
     };
 
-    console.log(obj);
 
     fetch(`/appointments/${id}`, {
         method: 'post',
@@ -147,7 +187,6 @@ calendar.on('beforeUpdateEvent', function ({ event, changes }) {
 
 calendar.on('beforeDeleteEvent', function (event) {
     const { id, calendarId } = event;
-    console.log(id);
 
     fetch(`/appointments/${id}`, {
         method: 'DELETE',
@@ -218,4 +257,3 @@ document.getElementById('prev').addEventListener('click', function () {
 });
 changeMonth(calendar, 'next');
 changeMonth(calendar, 'prev');
-
