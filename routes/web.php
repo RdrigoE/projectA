@@ -22,9 +22,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $user = request()->user();
-    return view('welcome', ['clients' => $user->clients, 'jobs' => $user->jobs]);
+    return view('welcome');
 });
+
+
+Route::get('/calendar', function () {
+    $user = request()->user();
+    return view('calendar');
+})->middleware('auth');
 
 Route::get('/api/appoint', function () {
     $user = request()->user();

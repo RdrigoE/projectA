@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="_csrf_header" content="{{ csrf_token() }}" />
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -30,7 +30,7 @@
         @endif
 
         <!-- Page Content -->
-        <main class="mx-auto mt-4 max-w-[1000px]">
+        <main class="mx-auto mt-4 max-w-[1200px]">
             {{ $slot }}
         </main>
     </div>
