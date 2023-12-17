@@ -9,8 +9,8 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     name="client_id" id="client_id">
                     @foreach ($clients as $client)
-                        <option value="{{ $client->id }}"
-                            {{ old($appointment->client->is($client)) ? 'selected' : '' }}>{{ $client->name }}</option>
+                        <option value="{{ $client->id }}" {{ $appointment->client->is($client) ? 'selected' : '' }}>
+                            {{ $client->name }}</option>
                     @endforeach
                 </select>
                 @error('client_id')
@@ -23,7 +23,7 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     name="job_id" id="job_id">
                     @foreach ($jobs as $job)
-                        <option value="{{ $job->id }}" {{ old($appointment->job->is($job)) ? 'selected' : '' }}>
+                        <option value="{{ $job->id }}" {{ $appointment->job->is($job) ? 'selected' : '' }}>
                             {{ $job->title }}
                         </option>
                     @endforeach
