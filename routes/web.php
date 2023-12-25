@@ -21,12 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/calendar', function () {
     $user = request()->user();
     return view('calendar');
 })->middleware('auth');
