@@ -40,7 +40,7 @@ function updateDate() {
 
 getData();
 async function getData() {
-    let url = new URL('api/appoint', window.location.origin);
+    let url = new URL('api/appointment', window.location.origin);
     url.searchParams.append('month', calendar.getDateRangeStart().getFullYear() + '-' + calendar.getDateRangeStart().getMonth());
     const response = await fetch(url);
     const data = await response.json();
@@ -273,7 +273,27 @@ document.getElementById('today').addEventListener('click', function () {
     changeMonth(calendar, 'today');
     updateDate();
 });
+
+//month-day-year
+
+// Get the current URL
+var currentURL = window.location.href;
+
+currentURL = currentURL.split('/')[3]
+var urlParams = new URLSearchParams(currentURL);
+
+var year = urlParams.has('year') ? urlParams.get('year') : null;
+var month = urlParams.has('month') ? urlParams.get('month') : null;
+var day = urlParams.has('day') ? urlParams.get('day') : null;
+
+if (year && month && day) {
+    calendar.setDate(new Date(`${month}-${day}-${year}`))
+    console.log(new Date(`${month}-${day}-${year}`))
+}
+
 updateDate();
 changeMonth(calendar, 'next');
 changeMonth(calendar, 'prev');
+
+
 

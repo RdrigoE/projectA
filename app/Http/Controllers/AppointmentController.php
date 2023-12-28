@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
+use Carbon\Carbon;
+use DateTime;
+use Illuminate\Support\Facades\Date;
 
 class AppointmentController extends Controller
 {
@@ -45,8 +48,14 @@ class AppointmentController extends Controller
     {
         $user = request()->user();
         $user->appointments()->create($request->validated());
+        $date = new Carbon($request->date);
+        $params = array(
+            'year' => $date->year,
+            'month' => $date->month,
+            'day' => $date->day,
+        );
 
-        return redirect('/');
+        return redirect('?' . http_build_query($params));
     }
 
     /**

@@ -31,7 +31,7 @@ Route::get('/', function () {
     return view('calendar');
 })->middleware('auth');
 
-Route::get('/api/appoint', function () {
+Route::get('/api/appointment', function () {
     $user = request()->user();
     $dateStart = request()->input('month');
 
@@ -44,8 +44,12 @@ Route::get('/api/appoint', function () {
     $end = $dateStart->copy()->endOfMonth();
     return $user->appointments()->whereBetween('date', [$start, $end])->get();
 });
+
+
 Route::resource('/jobs', JobController::class)->except('show')->middleware('auth');
+
 Route::resource('/clients', ClientController::class)->except('show')->middleware('auth');
+
 Route::resource('/appointments', AppointmentController::class)->except('show')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
