@@ -99,8 +99,15 @@ class AppointmentController extends Controller
 
         $appointment->delete();
 
-        return http_response_code(200);
+        return back();
+    }
+    public function destroyInCalendar(Appointment $appointment)
+    {
+        $this->authorize('delete', $appointment);
 
-        // return back();
+
+        $appointment->delete();
+
+        return http_response_code(200);
     }
 }

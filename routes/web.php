@@ -44,6 +44,8 @@ Route::get('/api/appointment', function () {
     $end = $dateStart->copy()->endOfMonth();
     return $user->appointments()->whereBetween('date', [$start, $end])->get();
 });
+Route::delete('/api/appointments/{appointment}', [AppointmentController::class, 'destroyInCalendar']);
+
 
 
 Route::resource('/jobs', JobController::class)->except('show')->middleware('auth');

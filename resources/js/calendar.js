@@ -198,13 +198,13 @@ calendar.on('beforeUpdateEvent', function ({ event, changes }) {
 calendar.on('beforeDeleteEvent', function (event) {
     const { id, calendarId } = event;
 
-    fetch(`/appointments/${id}`, {
+    fetch(`/api/appointments/${id}`, {
         method: 'DELETE',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf_header"]').getAttribute('content'),
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-        },
+        }
     })
         .then(response => {
             if (!response.ok) {
