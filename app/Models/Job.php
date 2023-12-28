@@ -16,7 +16,7 @@ class Job extends Model
     public static function createAndStore()
     {
         return [
-            'title' => ['required', 'max:255', Rule::unique('jobs', 'title')->where(function ($query) {
+            'title' => ['required', 'max:50', Rule::unique('jobs', 'title')->where(function ($query) {
                 return $query->where('user_id', auth()->id());
             })]
         ];

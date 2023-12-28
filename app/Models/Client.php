@@ -16,7 +16,7 @@ class Client extends Model
     public static function create_and_update()
     {
         return [
-            'name' => ['required', 'min:2'],
+            'name' => ['required', 'min:2', 'max:50'],
         ];
     }
 

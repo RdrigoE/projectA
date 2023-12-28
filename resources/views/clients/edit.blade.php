@@ -3,7 +3,7 @@
         <x-form.form :method="'POST'" :action="route('clients.update', $client)">
             @method('patch')
             <x-form.title>Edit the Client</x-form.title>
-            <x-form.text-input :name="'name'" :value="$client->name" />
+            <x-form.text-input :name="'name'" :value="old('name') ? old('name') : $client->name" />
             <x-form.submit>
                 Update
             </x-form.submit>
